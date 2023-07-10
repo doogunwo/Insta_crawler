@@ -7,7 +7,7 @@ import time
 
 def parser_to_word():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--id', type=str, default="dgw0601@naver.com", help="input id")
+    parser.add_argument('--id', type=str, default="dgw0610@gmail.com", help="input id")
     parser.add_argument('--pw', type=str, default="Ehrjsdn123!", help="input pw")
     parser.add_argument('--w', type=str, default="dd.txt", help="word or text.path")
     parser.add_argument('--n', type=int, default=100, help="number of post")
