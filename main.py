@@ -5,18 +5,20 @@ import insta
 import math
 import time
 
+
 def parser_to_word():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--id', type=str, default="1", help="input id")
-    parser.add_argument('--pw', type=str, default="1", help="input pw")
+    parser.add_argument('--id', type=str, default="dgw0601@naver.com", help="input id")
+    parser.add_argument('--pw', type=str, default="Ehrjsdn123!", help="input pw")
     parser.add_argument('--w', type=str, default="dd.txt", help="word or text.path")
     parser.add_argument('--n', type=int, default=100, help="number of post")
     parser.add_argument('--l', type=str, default="2023-01-01", help="limit date")
     args = parser.parse_args()
+
     word1 = [args.id, args.pw, args.w, args.n, args.l]
-    txt= args.w
+    txt = args.w
     if txt.lower().endswith('.txt'):
-        with open(txt, 'r') as file:
+        with open(txt, 'r',encoding="utf8") as file:
             file_content = file.read()
             file_content = file_content.split("\n")
             word1[2] = file_content
@@ -25,13 +27,13 @@ def parser_to_word():
 
     return word1
 
+
 def parser_to_word2():
+    print("아이디 패스워드 검색어 갯수 제한날짜 를 차례대로 입력해주세요.")  # 1 3 5 7
+    word = input("명령어를 입력해주세요 >>")
+    word1 = word.split(" ")
+    return word1
 
-        print("아이디 패스워드 검색어 갯수 제한날짜 를 차례대로 입력해주세요.")# 1 3 5 7
-        word = input("명령어를 입력해주세요 >>")
-        word1 = word.split(" ")
-
-        return word1
 
 def main_word(order):
     start_time = time.time()
@@ -44,7 +46,7 @@ def main_word(order):
 
     end = time.time()
     timing = end - start_time
-    print("크롤링시간은 %s 초 입니다." % (str(timing)))
+    print("크롤링시간은 %s 초 입니다." % (str(round(timing,2))))
 
 def main_list(order):
     try:
@@ -68,10 +70,12 @@ def main_list(order):
         print("크롤링시간은 %s 초 입니다." % (str(timing)))
     except:
         pass
+
 if __name__ == "__main__":
+
     order = parser_to_word()
-    if isinstance(order[2],str):
+    if isinstance(order[2], str):
         main_word(order)
 
-    elif isinstance(order[2],list):
+    elif isinstance(order[2], list):
         main_list(order)
