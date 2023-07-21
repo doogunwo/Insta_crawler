@@ -1,7 +1,7 @@
 import re
 
 import pandas as pd
-
+import os
 
 class PD:
     # 데이터프레임
@@ -118,4 +118,14 @@ class PD:
         }
         w = pd.DataFrame(data)
         df = self.dateTest(w)
-        df.to_csv("C:/Users/USER/Desktop/CSV/" + str(word) + '.csv', index=False, encoding='utf-8-sig')
+
+        root = "C:/save/"
+        try:
+            if not os.path.exists(root):
+                os.makedirs(root)
+        except OSError:
+            print("저장 폴더 경로를 만들수 없습니다.")
+            root = input("저장 폴더를 만들고 주소를 입력해주세요 ex C:/save/")
+
+        df.to_excel(root+ str(word) + '.xlsx', index=False)
+        print("저장된 경로는 " + root +"입니다.")

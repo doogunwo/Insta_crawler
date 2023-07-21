@@ -18,7 +18,7 @@ def parser_to_word():
     word1 = [args.id, args.pw, args.w, args.n, args.l]
     txt = args.w
     if txt.lower().endswith('.txt'):
-        with open(txt, 'r',encoding="utf8") as file:
+        with open(txt, 'r', encoding="utf8") as file:
             file_content = file.read()
             file_content = file_content.split("\n")
             word1[2] = file_content
@@ -29,24 +29,34 @@ def parser_to_word():
 
 
 def parser_to_word2():
-    print("아이디 패스워드 검색어 갯수 제한날짜 를 차례대로 입력해주세요.")  # 1 3 5 7
-    word = input("명령어를 입력해주세요 >>")
-    word1 = word.split(" ")
-    return word1
+    global word1
+    try:
+        print("아이디, 패스워드, 검색어, 갯수, 제한날짜, 를 차례대로 입력해주세요(도움말= help)/ 프로그램 종료: quit.")  # 1 3 5 7
+        word = input("명령어를 입력해주세요 >>")
+        print(word)
+        word1 = word.split(" ")
+    except:
+        if word1 == "help":
+            word1 = "help"
+        else:
+            word1="quit"
+    finally:
+        return word1
 
 
-def main_word(order):
+def main_word(order5):
     start_time = time.time()
     math.factorial(100000)
-    res, start = insta.main2(order)
+    res, start = insta.main2(order5)
     df = pd.DataFrame(res, columns=['주소', '작성자', '내용', '작성시간', '좋아요', '검색어'])
     obj = Dafaframe.PD()
-    obj.get(df, order[4])
-    obj.save_csv(order[2])
+    obj.get(df, order5[4])
+    obj.save_csv(order5[2])
 
     end = time.time()
     timing = end - start_time
-    print("크롤링시간은 %s 초 입니다." % (str(round(timing,2))))
+    print("크롤링시간은 %s 초 입니다." % (str(round(timing, 2))))
+
 
 def main_list(order):
     try:
@@ -71,11 +81,20 @@ def main_list(order):
     except:
         pass
 
+
+def help():
+    print("2000개를 수집하더라도 저장되는 파일에는 기준 날짜 이후의 게시글은 저장되지 않습니다.")
+    print("문의는 010-9946-4447 , email: dgw0601@naver.com으로 주세요")
+
+
 if __name__ == "__main__":
+    while 1:
+        order = parser_to_word2()
+        print(order)
+        if len(order)> 1:
+            main_word(order)
+        if order[0] == "help":
+            help()
+        if order[0] == "quit":
+            break
 
-    order = parser_to_word()
-    if isinstance(order[2], str):
-        main_word(order)
-
-    elif isinstance(order[2], list):
-        main_list(order)

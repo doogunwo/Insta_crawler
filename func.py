@@ -1,3 +1,5 @@
+import time
+
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 
@@ -24,7 +26,6 @@ def login(driver, id, pw):
 
 
 def get_content(driver, search):
-
     date2 = driver.find_element(By.CLASS_NAME, "_aaqe")
     date = date2.get_attribute('datetime')
     # 링크
@@ -33,10 +34,9 @@ def get_content(driver, search):
     author = driver.find_element(By.CLASS_NAME, '_aaqt').text
     # 본문 내용
     #
-    content = driver.find_element(By.CSS_SELECTOR, '_a9zm').text
+    content = driver.find_element(By.CLASS_NAME, '_a9zr').text
     # 시간
     # date= driver.find_element(By.CSS_SELECTOR,'time._aaqe').text
-
     # 좋아요
     try:
         like = driver.find_element(By.CLASS_NAME, '_ae5m').text
@@ -51,17 +51,16 @@ def rimit(driver):
     dd = driver.find_element(By.CLASS_NAME, "_ac2a").text
     return dd
 def move_next(driver):  # 다음 게시글 조회
-
-    right = driver.find_element(By.CLASS_NAME, "_abl-")
+    # _aaqg _aaqh
+    right = driver.find_element(By.CSS_SELECTOR, "._aaqg._aaqh")
     right.click()
-    driver.implicitly_wait(4)
+
 
 
 def select_first(driver):
     fir = driver.find_element(By.CLASS_NAME, '_aagw').click()
     print(fir)
-    driver.implicitly_wait(10)
-
+    time.sleep(3)
 
 def insta_search(word):
     url = 'https://www.instagram.com/explore/tags/' + word + "/"
