@@ -1,7 +1,6 @@
 import argparse
 import pandas as pd
-import Dafaframe
-import insta
+from support import insta, Dafaframe
 import math
 import time
 
@@ -83,14 +82,12 @@ def main_list(order):
 
 
 def help():
-    print("2000개를 수집하더라도 저장되는 파일에는 기준 날짜 이후의 게시글은 저장되지 않습니다.")
-    print("문의는 010-9946-4447 , email: dgw0601@naver.com으로 주세요")
+    print("개발자:인턴 도건우  문의는 010-9946-4447 , email: dgw0601@naver.com으로 주세요")
 
 
 if __name__ == "__main__":
     while 1:
         order = parser_to_word2()
-        print(order)
         if len(order)> 1:
             main_word(order)
         if order[0] == "help":
