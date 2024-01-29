@@ -1,2 +1,5 @@
 *.css linguist-detectable=false
 *.html linguist-detectable=false
+*.tex linguist-detectable=false
+* linguist-vendored
+*.py linguist-vendored=false
